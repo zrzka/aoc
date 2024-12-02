@@ -10,10 +10,18 @@ first, second = File
   .map { |x| x.split.map(&:to_i) }
   .transpose
 
-first.sort!
-second.sort!
+first_sorted = first.sort
+second_sorted = second.sort
 
-result = first.zip(second)
+part1 = first_sorted.zip(second_sorted)
   .reduce(0) { |acc, (a, b)| acc + (a - b).abs }
 
-puts result
+puts part1
+
+first_occurences = first.tally
+second_occurences = second.tally
+
+part2 = first_occurences
+  .reduce(0) { |acc, (k, v)| acc + v * k * second_occurences.fetch(k, 0) }
+
+puts part2

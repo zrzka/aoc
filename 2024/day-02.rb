@@ -17,8 +17,26 @@ def safe_report?(report)
   safe_increasing_report?(report) || safe_decreasing_report?(report)
 end
 
-safe_reports = File
+part1 = File
   .foreach("#{__dir__}/day-02.txt")
   .reduce(0) { |acc, line| acc + (safe_report?(line.split.map(&:to_i)) ? 1 : 0) }
 
-puts safe_reports
+puts part1
+
+part2 = File
+  .foreach("#{__dir__}/day-02.txt")
+  .reduce(0) do |acc, line|
+    report = line.split.map(&:to_i)
+
+    if safe_report?(report)
+      acc + 1
+    else
+      safe = (0...report.size)
+        .reduce(false) do |acc, idx|
+          acc || safe_report?(report[0...idx] + report[idx + 1..-1])
+        end
+      acc + (safe ? 1 : 0)
+    end
+  end
+
+puts part2
