@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# https://adventofcode.com/2024/day/6
+# https://adventofcode.com/2024/day/7
 
 require "bundler/setup"
 Bundler.require
